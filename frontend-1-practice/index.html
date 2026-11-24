@@ -1,26 +1,120 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html class="document" lang="ru">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Выбор даты и времени</title>
+    <meta name="description" content="Выбор даты и времени визита в барбершоп «Тихий клуб»." />
+    <title>Дата и время — Тихий клуб</title>
     <link rel="stylesheet" href="styles.css" />
   </head>
-  <body>
-    <!--
-      ЗАДАНИЕ
-      ========
-      Сверстать страницу выбора даты и времени по своему макету.
+  <body class="site">
+    <div class="site-frame">
+      <header class="masthead">
+        <div class="masthead-inner">
+          <a class="brand" href="./index.html" aria-label="Тихий клуб — главная">ТИХИЙ КЛУБ</a>
+          <span class="brand-caption">БАРБЕРШОП</span>
+          <nav class="site-navigation" aria-label="Основная навигация">
+            <a class="navigation-link" href="#">Услуги</a>
+            <a class="navigation-link" href="#">Мастера</a>
+            <a class="navigation-link" href="#">Отзывы</a>
+          </nav>
+          <a class="salon-phone" href="tel:+74951234567">+7 (495) 123-45-67</a>
+        </div>
+      </header>
 
-      Пока это только вёрстка. Никакого JavaScript — ни кликов,
-      ни переходов, ни выбора дня. Всё статично.
+      <main class="appointment">
+        <p class="eyebrow">Онлайн-запись / Шаг 3 из 5</p>
+        <nav class="booking-progress" aria-label="Этапы записи">
+          <ol class="progress-list">
+            <li class="progress-step progress-step--complete">✓ Мастер</li>
+            <li class="progress-step progress-step--complete">✓ Услуга</li>
+            <li class="progress-step progress-step--current" aria-current="step">3 Дата и время</li>
+            <li class="progress-step">4 Контакты</li>
+            <li class="progress-step">5 Подтверждение</li>
+          </ol>
+        </nav>
 
-      Стили пишите в styles.css. Разметку — здесь.
-    -->
+        <section class="visit-choice" aria-labelledby="page-heading">
+          <p class="service-label">Мужская стрижка</p>
+          <h1 class="page-heading" id="page-heading">Выберите удобное время</h1>
+          <p class="visit-description">Дмитрий · 45 минут · 1 600 ₽ <span class="availability-note">· Доступна запись 5 ноября; 6 ноября — мест нет.</span></p>
 
-    <div class="page">
-      <!-- Начните отсюда. Разметьте шапку, основную область
-           с календарём и слотами, подвал. -->
+          <div class="schedule-layout">
+            <section class="month-panel" aria-labelledby="month-heading">
+              <h2 class="panel-heading" id="month-heading">Ноябрь 2026</h2>
+              <div class="weekday-grid" aria-hidden="true">
+                <span class="weekday">Пн</span><span class="weekday">Вт</span><span class="weekday">Ср</span><span class="weekday">Чт</span><span class="weekday">Пт</span><span class="weekday">Сб</span><span class="weekday">Вс</span>
+              </div>
+              <div class="date-grid" role="group" aria-label="Даты ноября 2026 года">
+                <!-- 1 ноября — воскресенье: шесть пустых ячеек перед первым числом. -->
+                <span class="date-spacer" aria-hidden="true"></span><span class="date-spacer" aria-hidden="true"></span><span class="date-spacer" aria-hidden="true"></span><span class="date-spacer" aria-hidden="true"></span><span class="date-spacer" aria-hidden="true"></span><span class="date-spacer" aria-hidden="true"></span>
+                <button class="date-button" type="button" aria-label="1 ноября, воскресенье">1</button>
+                <button class="date-button" type="button" aria-label="2 ноября, понедельник">2</button>
+                <button class="date-button" type="button" aria-label="3 ноября, вторник">3</button>
+                <button class="date-button" type="button" aria-label="4 ноября, среда">4</button>
+                <button class="date-button date-button--selected" type="button" aria-label="5 ноября, четверг, выбрано" aria-pressed="true">5</button>
+                <button class="date-button date-button--busy" type="button" aria-label="6 ноября, пятница, нет свободных слотов">6</button>
+                <button class="date-button" type="button" aria-label="7 ноября, суббота">7</button>
+                <button class="date-button" type="button" aria-label="8 ноября, воскресенье">8</button>
+                <button class="date-button" type="button" aria-label="9 ноября, понедельник">9</button>
+                <button class="date-button" type="button" aria-label="10 ноября, вторник">10</button>
+                <button class="date-button" type="button" aria-label="11 ноября, среда">11</button>
+                <button class="date-button" type="button" aria-label="12 ноября, четверг">12</button>
+                <button class="date-button" type="button" aria-label="13 ноября, пятница">13</button>
+                <button class="date-button" type="button" aria-label="14 ноября, суббота">14</button>
+                <button class="date-button" type="button" aria-label="15 ноября, воскресенье">15</button>
+                <button class="date-button" type="button" aria-label="16 ноября, понедельник">16</button>
+                <button class="date-button" type="button" aria-label="17 ноября, вторник">17</button>
+                <button class="date-button" type="button" aria-label="18 ноября, среда">18</button>
+                <button class="date-button" type="button" aria-label="19 ноября, четверг">19</button>
+                <button class="date-button" type="button" aria-label="20 ноября, пятница">20</button>
+                <button class="date-button" type="button" aria-label="21 ноября, суббота">21</button>
+                <button class="date-button" type="button" aria-label="22 ноября, воскресенье">22</button>
+                <button class="date-button" type="button" aria-label="23 ноября, понедельник">23</button>
+                <button class="date-button" type="button" aria-label="24 ноября, вторник">24</button>
+                <button class="date-button" type="button" aria-label="25 ноября, среда">25</button>
+                <button class="date-button" type="button" aria-label="26 ноября, четверг">26</button>
+                <button class="date-button" type="button" aria-label="27 ноября, пятница">27</button>
+                <button class="date-button" type="button" aria-label="28 ноября, суббота">28</button>
+                <button class="date-button" type="button" aria-label="29 ноября, воскресенье">29</button>
+                <button class="date-button" type="button" aria-label="30 ноября, понедельник">30</button>
+              </div>
+            </section>
+
+            <section class="time-panel" aria-labelledby="time-heading">
+              <h2 class="panel-heading" id="time-heading"><time class="chosen-date" datetime="2026-11-05">5 ноября, четверг</time></h2>
+              <p class="time-instruction">Выберите время начала · 45 минут</p>
+              <div class="time-grid" role="group" aria-label="Время начала визита">
+                <button class="time-button time-button--unavailable" type="button" disabled aria-label="10:00, занято">10:00</button>
+                <button class="time-button time-button--unavailable" type="button" disabled aria-label="11:30, занято">11:30</button>
+                <button class="time-button time-button--selected" type="button" aria-pressed="true" aria-label="14:00, выбрано">14:00</button>
+                <button class="time-button time-button--unavailable" type="button" disabled aria-label="15:30, занято">15:30</button>
+                <button class="time-button time-button--unavailable" type="button" disabled aria-label="17:00, занято">17:00</button>
+                <button class="time-button time-button--unavailable" type="button" disabled aria-label="19:00, занято">19:00</button>
+              </div>
+              <p class="selected-interval">✓ 14:00–14:45 · время выбрано</p>
+              <p class="timezone-note">Время указано по Москве</p>
+            </section>
+          </div>
+
+          <div class="booking-actions">
+            <button class="action-button action-button--secondary" type="button">← Услуги</button>
+            <button class="action-button action-button--primary" type="button">Продолжить →</button>
+          </div>
+        </section>
+      </main>
+
+      <footer class="salon-footer" id="contacts">
+        <div class="footer-inner">
+          <div class="footer-signature">
+            <a class="brand brand--footer" href="./index.html">ТИХИЙ КЛУБ</a>
+            <span class="signature-divider" aria-hidden="true">/</span>
+            <p class="salon-motto">Хорошая стрижка. Свой ритм.</p>
+          </div>
+          <address class="salon-details">Москва, ул. Садовая, 15 <span class="details-divider">·</span> Ежедневно 10:00–21:00 <span class="details-divider">·</span> <a class="footer-phone" href="tel:+74951234567">+7 (495) 123-45-67</a></address>
+          <p class="footer-legal">© 2026 Тихий клуб. <span class="privacy-label">Политика конфиденциальности</span></p>
+        </div>
+      </footer>
     </div>
   </body>
 </html>
