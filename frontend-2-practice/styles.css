@@ -1,13 +1,154 @@
-/* Стили страницы.
-   Скопируйте с предудущей практики. */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap");
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* Палитра и размеры взяты из макета «Тихий клуб». */
+:root {
+  --paper: #f5f1e9;
+  --ink: #242a27;
+  --muted: #777b74;
+  --accent: #ad573b;
+  --accent-hover: #91452d;
+  --white: #fff;
+  --day-size: 40px;
 }
 
-body {
-  min-height: 100vh;
-  font-family: sans-serif;
+* { box-sizing: border-box; }
+.document { color-scheme: light; }
+.site { margin: 0; background: var(--paper); color: var(--ink); font-family: "Manrope", Arial, sans-serif; font-size: 14px; line-height: 1.45; }
+.site-frame { max-width: 1024px; min-height: 100vh; margin-inline: auto; display: flex; flex-direction: column; }
+.masthead { background: var(--ink); color: var(--white); }
+.masthead-inner { min-height: 96px; padding: 24px 32px; display: flex; align-items: center; gap: 32px; }
+.brand { color: inherit; font-size: 24px; font-weight: 800; letter-spacing: -1px; text-decoration: none; white-space: nowrap; transition: color 160ms ease; }
+.brand:hover { color: #e6ad93; }
+.brand-caption { font-size: 9px; color: #b3b6af; }
+.site-navigation { display: flex; align-items: center; gap: 32px; }
+.navigation-link { color: #d0d2cc; font-size: 14px; text-decoration: none; transition: color 160ms ease; }
+.navigation-link:hover { color: #e6ad93; }
+.salon-phone { color: var(--white); font-size: 14px; font-weight: 700; white-space: nowrap; text-decoration: none; transition: color 160ms ease; }
+.salon-phone:hover { color: #e6ad93; }
+.appointment { flex: 1; padding: 48px 48px 48px; }
+.eyebrow { margin: 0; color: var(--accent); font-size: 12px; font-weight: 700; text-transform: uppercase; }
+.booking-progress { margin-top: 24px; }
+.progress-list { padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 18px; list-style: none; }
+.progress-step { color: var(--muted); font-size: 12px; }
+.progress-step--complete { color: #777b74; }
+.progress-step--current { color: var(--accent); font-weight: 700; }
+.visit-choice { margin-top: 32px; }
+.service-label { margin: 0 0 24px; color: var(--accent); font-size: 12px; font-weight: 700; }
+.page-heading { margin: 0 0 32px; font-size: 36px; line-height: 1.45; font-weight: 800; letter-spacing: -1px; }
+.visit-description { margin: 0 0 32px; color: var(--muted); font-size: 16px; }
+.schedule-layout { display: flex; align-items: flex-start; gap: 24px; }
+.month-panel, .time-panel { flex: 1 1 0; min-width: 0; padding: 24px; border-radius: 20px; background: var(--white); }
+.panel-heading { margin: 0; font-size: 20px; line-height: 1.45; font-weight: 700; }
+.chosen-date { color: inherit; }
+.weekday-grid, .date-grid { display: grid; grid-template-columns: repeat(7, var(--day-size)); column-gap: 8px; }
+.weekday-grid { margin-top: 24px; margin-bottom: 24px; }
+.weekday { color: var(--muted); font-size: 12px; text-align: center; }
+.date-grid { row-gap: 18px; }
+.date-spacer { width: var(--day-size); height: var(--day-size); }
+.date-button { width: var(--day-size); height: var(--day-size); padding: 0; border: 0; border-radius: 10px; background: transparent; color: var(--ink); font: inherit; font-size: 14px; transition: color 160ms ease, background-color 160ms ease, box-shadow 160ms ease; }
+.date-button:not(:disabled):hover { background: #f0e2d8; color: #7d3d29; box-shadow: 0 2px 8px #ad573b1f; }
+.date-button--selected { color: var(--white); background: var(--accent); font-weight: 700; }
+.date-button--selected:hover { color: var(--white); background: var(--accent-hover); }
+.time-instruction { margin: 24px 0; color: var(--muted); font-size: 12px; }
+.time-grid { display: grid; grid-template-columns: repeat(3, 72px); gap: 20px 8px; }
+.time-button { min-height: 54px; padding: 14px 12px; border: 0; border-radius: 12px; color: var(--ink); background: transparent; font: inherit; font-weight: 600; transition: background-color 160ms ease, box-shadow 160ms ease; }
+.time-button:not(:disabled):hover { background: #f0e2d8; box-shadow: 0 3px 10px #ad573b26; }
+.time-button--selected { background: var(--accent); color: var(--white); }
+.time-button--selected:not(:disabled):hover { background: var(--accent-hover); }
+.time-button--unavailable { color: #afb2ac; cursor: not-allowed; }
+.selected-interval { margin: 32px 0 24px; color: var(--accent); font-size: 12px; font-weight: 700; }
+.timezone-note { margin: 0; color: var(--muted); font-size: 10px; }
+.booking-actions { display: flex; flex-wrap: wrap; gap: 16px; margin-top: 28px; }
+.action-button { min-height: 54px; padding: 16px; border: 0; border-radius: 12px; font: inherit; font-weight: 600; transition: background-color 160ms ease, box-shadow 160ms ease; }
+.action-button--secondary { background: var(--white); color: var(--ink); }
+.action-button--secondary:hover { background: #e9e4db; box-shadow: 0 3px 12px #242a2712; }
+.action-button--primary { background: var(--accent); color: var(--white); }
+.action-button--primary:not(:disabled):hover { background: var(--accent-hover); box-shadow: 0 4px 14px #ad573b33; }
+.salon-footer { margin-top: auto; background: var(--ink); color: var(--white); }
+.footer-inner { padding: 40px; }
+.footer-signature { display: flex; align-items: center; flex-wrap: wrap; gap: 18px; }
+.brand--footer { font-size: 24px; }
+.signature-divider { font-size: 20px; font-weight: 700; }
+.salon-motto { margin: 0; font-size: 20px; font-weight: 600; }
+.salon-details { margin-top: 24px; font-size: 12px; font-style: normal; color: #d0d2cc; }
+.details-divider { margin-inline: 6px; }
+.footer-phone { color: inherit; text-decoration: none; transition: color 160ms ease; }
+.footer-phone:hover { color: #e6ad93; }
+.footer-legal { margin: 24px 0 0; color: #a7aca4; font-size: 10px; }
+.privacy-label { display: inline-block; margin-left: 16px; }
+a, button:not(:disabled) { cursor: pointer; }
+a:focus-visible, button:focus-visible { outline: 3px solid #d58a68; outline-offset: 4px; }
+
+@media (max-width: 900px) {
+  .masthead-inner { gap: 24px; flex-wrap: wrap; }
+  .brand-caption { display: none; }
+  .site-navigation { margin-left: auto; }
+  .salon-phone { margin-left: auto; }
+  .weekday-grid, .date-grid { grid-template-columns: repeat(7, minmax(0, 1fr)); column-gap: 2px; }
+  .date-button, .date-spacer { width: 100%; }
+}
+
+@media (max-width: 650px) {
+  .masthead-inner { min-height: auto; padding: 24px; gap: 20px; }
+  .brand { font-size: 22px; }
+  .salon-phone { font-size: 12px; }
+  .site-navigation { order: 3; margin-left: 0; width: 100%; gap: 28px; }
+  .appointment { padding: 32px 20px 40px; }
+  .progress-list { gap: 10px 16px; }
+  .progress-step { font-size: 11px; }
+  .visit-choice { margin-top: 28px; }
+  .service-label { margin-bottom: 16px; }
+  .page-heading { font-size: 30px; line-height: 1.25; margin-bottom: 24px; }
+  .visit-description { font-size: 14px; line-height: 1.65; margin-bottom: 24px; }
+  .schedule-layout { flex-direction: column; gap: 20px; }
+  .month-panel, .time-panel { flex: auto; width: 100%; padding: 24px; }
+  .weekday-grid, .date-grid { grid-template-columns: repeat(7, minmax(0, 1fr)); gap: 12px 2px; }
+  .time-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .booking-actions { gap: 12px; }
+  .action-button--primary { flex-grow: 1; }
+  .footer-inner { padding: 32px 24px; }
+  .footer-signature { gap: 12px; }
+  .signature-divider { display: none; }
+  .salon-motto { width: 100%; font-size: 17px; }
+  .salon-details { line-height: 1.9; }
+  .privacy-label { margin-left: 0; display: block; margin-top: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { transition: none !important; }
+}
+
+.month-header, .month-navigation { display: flex; align-items: center; gap: 8px; }
+.month-header { justify-content: space-between; }
+.month-arrow {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 10px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: 24px;
+  line-height: 1;
+}
+.month-arrow:hover { background: #f0e2d8; color: #7d3d29; }
+.date-button:disabled { color: #92958e; background: #f6f4ef; cursor: not-allowed; }
+.date-button--selected:not(:disabled):hover { color: var(--white); background: var(--accent-hover); }
+.no-slots { margin: 0; }
+.booking-summary, .booking-feedback {
+  margin: 28px 0 0;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: #e7eadf;
+}
+.summary-label { margin: 0 0 4px; color: var(--muted); font-size: 12px; }
+.summary-value { margin: 0; font-weight: 700; }
+.action-button--secondary { display: inline-flex; align-items: center; text-decoration: none; }
+.action-button--primary:disabled { background: #dedad1; color: #666960; cursor: not-allowed; }
+.time-grid[hidden] { display: none; }
+
+@media (max-width: 900px) {
+  .time-grid { grid-template-columns: repeat(3, minmax(0, 72px)); }
+  .time-button { padding-inline: 4px; }
 }
