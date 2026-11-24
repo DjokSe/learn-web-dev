@@ -1,59 +1,72 @@
-// App — корневой компонент приложения.
-//
-// ЗАДАНИЕ
-// --------
-// Перенесите свою страницу выбора даты и времени из нативного JS
-// на React. У вас уже есть:
-//   - готовая вёрстка (HTML);
-//   - готовые стили (CSS);
-//   - рабочий код на нативном JS (валидация дат, рендер календаря,
-//     обработчики кликов, выбор слота).
-//
-// Теперь нужно то же самое сделать в React.
-//
-// ЧТО НУЖНО СДЕЛАТЬ
-// ------------------
-// 1. Разбить страницу на компоненты. Как именно — решайте сами.
-//    Обычно выделяют: шапку, подвал, календарь, сетку слотов,
-//    нижнюю панель.
-//
-// 2. Перенести вёрстку из HTML в JSX. Стили оставить как есть,
-//    просто положить их в тот же проект (например, в src/styles/
-//    или рядом с компонентами).
-//
-// 3. Заменить нативное состояние (переменные + прямые манипуляции
-//    с DOM) на useState. Какие именно данные должны жить в состоянии —
-//    подумайте сами. Скорее всего: текущий месяц, выбранный день,
-//    выбранное время, массив слотов.
-//
-// 4. Рендер календаря и слотов делать через JSX и .map(),
-//    без innerHTML и querySelector.
-//
-// 5. Обработчики кликов — через onClick прямо в JSX,
-//    без addEventListener.
-//
-// 6. Функции для работы с датами, которые вы уже написали
-//    на нативном JS (построение сетки календаря, сравнение дат,
-//    проверка «не раньше сегодня»), можно переиспользовать.
-//    Они чистые — не зависят от React. Создайте файл
-//    src/utils/date.js и перенесите их туда.
-//
-//
-// ПОДСКАЗКА
-// ---------
-// Если что-то не работает или непонятно, как перевести нативный
-// код на React — вернитесь к лекции. Там разбирались все
-// основные приёмы: состояние, пропсы, рендер списков, колбэки.
-//
-// Ниже — пустой каркас. Здесь можно начать писать.
+import { useState } from "react";
+import Header from "./components/Header.jsx";
+import Footer from "./components/Footer.jsx";
+import BookingProgress from "./components/BookingProgress.jsx";
+import Calendar from "./components/Calendar.jsx";
+import TimeSlots from "./components/TimeSlots.jsx";
+import BookingBottomBar from "./components/BookingBottomBar.jsx";
+import { dateKey, formatDate, getSlotsForDay, getToday, isDateSelectable } from "./booking.js";
 
-function App() {
+export default function App() {
+  const [today] = useState(getToday);
+  const [currentMonth, setCurrentMonth] = useState(today.getMonth());
+  const [currentYear, setCurrentYear] = useState(today.getFullYear());
+  const [selectedDay, setSelectedDay] = useState(today);
+  const [selectedTime, setSelectedTime] = useState(null);
+  const [slots, setSlots] = useState(() => getSlotsForDay(today, today));
+  const [confirmed, setConfirmed] = useState(false);
+
+  function changeMonth(offset) {
+    const next = new Date(currentYear, currentMonth + offset, 1);
+    setCurrentMonth(next.getMonth());
+    setCurrentYear(next.getFullYear());
+  }
+
+  function selectDay(day) {
+    if (!isDateSelectable(day, today) || dateKey(day) === dateKey(selectedDay)) return;
+    setSelectedDay(day);
+    setSelectedTime(null);
+    setSlots(getSlotsForDay(day, today));
+    setConfirmed(false);
+  }
+
+  function selectTime(time) {
+    setSelectedTime(time);
+    setConfirmed(false);
+  }
+
+  const summary = formatDate(selectedDay) + " • " + (selectedTime ?? "время не выбрано");
+
   return (
-    <div>
-      {/* Начните отсюда. Например, разметьте .page, добавьте шапку,
-            основную область, подвал. */}
+    <div className="site-frame">
+      <Header />
+      <main className="appointment">
+        <p className="eyebrow">Онлайн-запись / Шаг 3 из 5</p>
+        <BookingProgress />
+        <section className="visit-choice" aria-labelledby="page-heading">
+          <p className="service-label">Мужская стрижка</p>
+          <h1 className="page-heading" id="page-heading">Выберите удобное время</h1>
+          <p className="visit-description">Дмитрий · 45 минут · 1 600 ₽</p>
+          <div className="schedule-layout">
+            <Calendar
+              year={currentYear}
+              month={currentMonth}
+              today={today}
+              selectedDay={selectedDay}
+              onDayClick={selectDay}
+              onMonthChange={changeMonth}
+            />
+            <TimeSlots date={selectedDay} slots={slots} selectedTime={selectedTime} onTimeClick={selectTime} />
+          </div>
+          <BookingBottomBar
+            summary={summary}
+            canContinue={selectedTime !== null}
+            confirmed={confirmed}
+            onContinue={() => setConfirmed(true)}
+          />
+        </section>
+      </main>
+      <Footer />
     </div>
   );
 }
-
-export default App;
